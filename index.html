@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musaib Reyaz — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portfolio.css">
+</head>
+<style>
+    /* ===== Tokens ===== */
+:root{
+  --bg:#090C14;
+  --bg-alt:#10162A;
+  --line:#232B45;
+  --cyan:#00E5FF;
+  --pink:#FF2E63;
+  --amber:#FFC93C;
+  --text:#F5F7FA;
+  --muted:#8B93A7;
+  --font-head:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+section{padding:6rem 8vw;}
+@media(max-width:768px){ section{padding:4rem 6vw;} }
+
+a{color:inherit;text-decoration:none;}
+
+/* ===== Header / Nav ===== */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  background:rgba(9,12,20,0.75);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 8vw;
+}
+.logo{font-family:var(--font-head);font-weight:700;font-size:1.3rem;}
+.logo span{color:var(--cyan);}
+
+#navMenu{display:flex;list-style:none;gap:2.2rem;}
+#navMenu a{
+  font-weight:500;color:var(--muted);position:relative;
+  transition:color .2s;
+}
+#navMenu a::after{
+  content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;
+  background:var(--cyan);transition:width .25s;
+}
+#navMenu a:hover{color:var(--text);}
+#navMenu a:hover::after{width:100%;}
+
+.menu{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.menu span{width:24px;height:2px;background:var(--text);}
+
+@media(max-width:768px){
+  .menu{display:flex;}
+  #navMenu{
+    position:absolute;top:100%;right:0;width:60%;
+    flex-direction:column;background:var(--bg-alt);
+    border-left:1px solid var(--line);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  #navMenu.open{max-height:300px;padding:1.5rem 2rem;}
+}
+
+/* ===== Hero ===== */
+#home{
+  padding-top:9rem;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+#home::before{
+  content:"";position:absolute;top:10%;right:5%;width:420px;height:420px;
+  background:radial-gradient(circle, rgba(0,229,255,0.18), transparent 70%);
+  filter:blur(10px);pointer-events:none;
+}
+
+.hero{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:3rem;width:100%;
+}
+.hero-text{max-width:640px;}
+
+.profile-box{
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  flex-shrink:0;
+}
+.profile-img{
+  width:clamp(140px, 30vw, 260px);
+  height:clamp(140px, 30vw, 260px);
+  object-fit:cover;
+  border-radius:50%;border:3px solid var(--cyan);
+  box-shadow:0 0 40px rgba(0,229,255,0.4);
+}
+.image-select{
+  font-family:var(--font-mono);font-size:.8rem;color:var(--muted);
+  border:1px dashed var(--line);padding:.5rem .9rem;cursor:pointer;
+  transition:border-color .2s, color .2s;
+}
+.image-select:hover{border-color:var(--cyan);color:var(--cyan);}
+
+@media(max-width:900px){
+  .hero{flex-direction:column-reverse;text-align:center;}
+  .hero-text{max-width:100%;}
+  .buttons{justify-content:center;}
+}
+
+.code-tag{
+  font-family:var(--font-mono);color:var(--pink);font-size:.95rem;margin-bottom:.8rem;
+}
+
+#home h1{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.1;
+}
+.cursor{color:var(--cyan);animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+#home h2{
+  font-family:var(--font-head);font-weight:500;color:var(--amber);
+  font-size:1.4rem;margin:.6rem 0 1.4rem;
+}
+
+#home p{max-width:640px;color:var(--muted);}
+.highlight{color:var(--cyan);font-weight:600;}
+
+.buttons{display:flex;gap:1rem;margin-top:2.2rem;flex-wrap:wrap;}
+.btn{
+  padding:.85rem 1.8rem;border:1px solid var(--line);font-weight:600;
+  transition:transform .2s, border-color .2s, background .2s;
+}
+.btn.primary{background:var(--cyan);color:var(--bg);border-color:var(--cyan);}
+.btn:hover{transform:translateY(-3px);}
+.btn:not(.primary):hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ===== Section titles ===== */
+.section-title{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  margin-bottom:2.5rem;display:flex;flex-direction:column;gap:.3rem;
+}
+.section-title span:not(.tag){color:var(--pink);}
+.tag{
+  font-family:var(--font-mono);font-weight:400;font-size:.9rem;
+  color:var(--muted);
+}
+
+/* ===== About ===== */
+.about-container{max-width:720px;}
+.about-container p{color:var(--muted);margin-bottom:1rem;}
+.about-container strong{color:var(--text);}
+.location{
+  margin-top:1.2rem;display:inline-block;font-family:var(--font-mono);
+  font-size:.85rem;color:var(--amber);border:1px solid var(--line);
+  padding:.4rem .9rem;
+}
+
+/* ===== Education timeline ===== */
+.timeline{
+  position:relative;max-width:640px;padding-left:2rem;
+  border-left:2px solid var(--line);
+}
+.timeline-item{position:relative;padding-bottom:2.4rem;}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-item::before{
+  content:"";position:absolute;left:-2.45rem;top:.3rem;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--cyan);
+}
+.timeline-item h3{font-family:var(--font-head);font-size:1.15rem;margin-bottom:.4rem;}
+.timeline-item p{color:var(--muted);}
+
+/* ===== Projects ===== */
+.project-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.4rem;
+}
+.project-card{
+  background:var(--bg-alt);border:1px solid var(--line);
+  padding:1.8rem;transition:border-color .25s, transform .25s;
+}
+.project-card:hover{border-color:var(--pink);transform:translateY(-6px);}
+.project-card h3{font-family:var(--font-head);margin-bottom:.6rem;color:var(--cyan);}
+.project-card p{color:var(--muted);font-size:.95rem;}
+
+/* ===== Contact ===== */
+.contact-container{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+}
+@media(max-width:768px){ .contact-container{grid-template-columns:1fr;} }
+
+.contact-info h3{font-family:var(--font-head);margin-bottom:1rem;}
+.contact-info p{color:var(--muted);margin-bottom:1rem;}
+.email-link{color:var(--cyan);}
+.social-links{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap;}
+.social-links a{
+  border:1px solid var(--line);padding:.5rem 1rem;font-size:.9rem;
+  transition:border-color .2s, color .2s;
+}
+.social-links a:hover{border-color:var(--amber);color:var(--amber);}
+
+.contact-form form{display:flex;flex-direction:column;gap:.9rem;}
+.contact-form label{font-size:.85rem;color:var(--muted);}
+.contact-form input,
+.contact-form textarea{
+  background:var(--bg-alt);border:1px solid var(--line);color:var(--text);
+  padding:.75rem .9rem;font-family:var(--font-body);
+}
+.contact-form input:focus,
+.contact-form textarea:focus{outline:none;border-color:var(--cyan);}
+.contact-form textarea{min-height:110px;resize:vertical;}
+.contact-form button{
+  background:var(--pink);color:#fff;border:none;padding:.85rem;
+  font-weight:600;cursor:pointer;transition:opacity .2s;
+}
+.contact-form button:hover{opacity:.85;}
+
+/* ===== Footer ===== */
+footer{
+  text-align:center;padding:2rem;color:var(--muted);
+  font-size:.85rem;border-top:1px solid var(--line);
+}
+
+/* ===== Accessibility ===== */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--cyan);outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce){
+  .cursor{animation:none;}
+  *{transition:none !important;}
+}
+</style>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <nav>
+        <div class="logo">Musaib <span>Reyaz</span></div>
+
+        <div class="menu" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+
+        <ul id="navMenu">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#education" onclick="closeMenu()">Education</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ================= HOME ================= -->
+<section id="home">
+    <div class="hero">
+
+        <div class="hero-text">
+            <p class="code-tag">// full stack learner</p>
+
+            <h1>Hi, I'm <span id="typedName"></span><span class="cursor">|</span></h1>
+
+            <h2>GIT &amp; AI Learner</h2>
+
+            <p>
+                I am a <span class="highlight">12th pass</span> student from
+                <span class="highlight">Muslim Education Institute</span> and currently studying
+                <span class="highlight">GIT &amp; Artificial Intelligence</span> at ILS, Srinagar.
+                I am interested in technology, programming, web development and data analytics.
+            </p>
+
+            <div class="buttons">
+                <a href="#about" class="btn primary">About Me</a>
+                <a href="#contact" class="btn">Contact Me</a>
+            </div>
+        </div>
+
+        <div class="profile-box">
+            <img src="./my-pic.jpeg" id="profileImage" class="profile-img" alt="Musaib Reyaz">
+    
+
+       
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+    <h2 class="section-title"><span class="tag">// about</span>About <span>Me</span></h2>
+
+    <div class="about-container">
+        <p>
+            Hello! My name is <strong>Musaib Reyaz</strong>. I have completed my 12th from
+            <strong>Muslim Education Institute</strong>. Currently, I am learning
+            <strong>GIT and Artificial Intelligence</strong> at ILS, Srinagar.
+        </p>
+        <p>
+            I am learning Python, HTML, CSS, data analytics and other useful computer skills.
+            My goal is to improve my technical skills and build useful projects.
+        </p>
+
+        <div class="location">📍 Pampore</div>
+    </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+    <h2 class="section-title"><span class="tag">// education</span>My <span>Education</span></h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>12th Pass</h3>
+            <p>Completed my 12th class from Muslim Education Institute.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Muslim Education Institute</h3>
+            <p>Completed my school education and successfully passed 12th.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>ILS, Srinagar</h3>
+            <p>Currently learning GIT and Artificial Intelligence.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+    <h2 class="section-title"><span class="tag">// projects</span>My <span>Projects</span></h2>
+
+    <div class="project-grid">
+        <div class="project-card">
+            <h3>Personal Portfolio Website</h3>
+            <p>A personal portfolio website created using HTML, CSS and JavaScript to showcase my skills, education and projects.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Study Notes App</h3>
+            <p>A simple study notes project designed to organize and manage important study material.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>E-Commerce Landing Page</h3>
+            <p>A modern e-commerce landing page designed using HTML and CSS with a responsive layout.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Blog Website Template</h3>
+            <p>A clean blog website template created for displaying articles, posts and information.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+    <h2 class="section-title"><span class="tag">// contact</span>Get In <span>Touch</span></h2>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+            <h3>Let's Connect</h3>
+
+            <p>📍 <strong>Location:</strong><br>Pampore, Kashmir</p>
+
+            <p>📧 <strong>Email:</strong><br>
+                <a class="email-link" href="mailto:musaibreyaz321@gmail.com">musaibreyaz321@gmail.com</a>
+            </p>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://www.instagram.com/_musaiibb__" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://github.com/musaibriyaz321-alt" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact">
+                <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+                <label>Name</label>
+                <input type="text" name="name" placeholder="Your name" required>
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+
+                <label>Message</label>
+                <textarea name="message" placeholder="Write your message here..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Musaib Reyaz. Built with HTML, CSS &amp; JS.</p>
+</footer>
+
+<script>
+  // mobile menu
+  function toggleMenu(){ document.getElementById('navMenu').classList.toggle('open'); }
+  function closeMenu(){ document.getElementById('navMenu').classList.remove('open'); }
+
+  // profile image preview (session-only, does not persist after refresh)
+  document.getElementById('profileUpload').addEventListener('change', function(event){
+    const file = event.target.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('profileImage').src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // hero name typewriter — the one orchestrated motion moment
+  const name = "Musaib Reyaz";
+  const target = document.getElementById('typedName');
+  let i = 0;
+  (function type(){
+    if(i <= name.length){
+      target.textContent = name.slice(0, i);
+      i++;
+      setTimeout(type, 90);
+    }
+  })();
+</script>
+
+</body>
+</html>
